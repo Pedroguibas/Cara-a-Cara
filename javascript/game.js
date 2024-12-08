@@ -26,6 +26,7 @@ async function fetchPokemon() {
     }
     spinner.style = 'display: none;'
     mainContainer.style = 'display: block;';
+    getRandomCard();
 }
 
 function addPokemonCard(num, name) {
@@ -85,6 +86,17 @@ async function geraTabuleiroCopiado(pokemonNumber) {
     }
     spinner.style = 'display: none;'
     mainContainer.style = 'display: block;';
+    getRandomCard();
+}
+
+function getRandomCard() {
+    document.getElementById('chosenCardContainer').innerHTML = '';
+    let gameCards = document.querySelectorAll('.pokemonCard');
+    let cardNumber = Math.floor(Math.random() * 25 + 1);
+    let chosenCard = document.createElement('div');
+    chosenCard.classList.add('pokemonCard');
+    chosenCard.innerHTML = gameCards[cardNumber].innerHTML;
+    document.getElementById('chosenCardContainer').appendChild(chosenCard);
 }
 
 let numberBlackList;
