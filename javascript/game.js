@@ -8,7 +8,7 @@ function getRandomNumber(blackList) {
 }
 
 async function fetchPokemon() {
-    gameCode = '';
+    gameCode = 'pkmngmcd:';
     document.getElementById('gameContainer').innerHTML = '';
     let mainContainer = document.getElementById('mainContent');
     mainContainer.style = 'display: none;'
@@ -51,21 +51,26 @@ function copiaCodigo() {
 
 function getGameCodeReady() {
     let externalGameCode = document.getElementById('inputCodigoExterno').value;
-    let j = 0;
-    coppiedGamePokemonList = ['', ''];
-    for (let i=0; i<externalGameCode.length; i++) {
-        if (externalGameCode.charAt(i) != ';') {
-            coppiedGamePokemonList[j] = coppiedGamePokemonList[j] + externalGameCode.charAt(i)
-        } else {
-            j++;
-            coppiedGamePokemonList[j] = '';
+    if (externalGameCode.includes('pkmngmcd:')) {
+        let j = 0;
+        coppiedGamePokemonList = ['', ''];
+        for (let i=9; i<externalGameCode.length; i++) {
+            if (externalGameCode.charAt(i) != ';') {
+                coppiedGamePokemonList[j] = coppiedGamePokemonList[j] + externalGameCode.charAt(i)
+            } else {
+                j++;
+                coppiedGamePokemonList[j] = '';
+            }
         }
+        geraTabuleiroCopiado(coppiedGamePokemonList);
+    } else {
+        document.getElementById('inputCodigoExterno').value = '';
+        window.alert('Código invalido.');
     }
-    geraTabuleiroCopiado(coppiedGamePokemonList);
 }
 
 async function geraTabuleiroCopiado(pokemonNumber) {
-    gameCode = '';
+    gameCode = 'pkmngmcd:';
     document.getElementById('gameContainer').innerHTML = '';
     let mainContainer = document.getElementById('mainContent');
     mainContainer.style = 'display: none;'
@@ -83,7 +88,7 @@ async function geraTabuleiroCopiado(pokemonNumber) {
 }
 
 let numberBlackList;
-let gameCode = '';
+let gameCode = 'pkmngmcd:';
 let coppiedGamePokemonList;
 const novoTabuleiroBtn = document.querySelector('#novoJogoBtn');
 novoTabuleiroBtn.addEventListener('click', fetchPokemon);
