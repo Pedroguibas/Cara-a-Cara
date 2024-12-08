@@ -139,3 +139,6 @@ copyGame.addEventListener('click', copiaCodigo);
 
 const loadGameBtn = document.getElementById('carrgarTabuleiroBtn');
 loadGameBtn.addEventListener('click', getGameCodeReady);
+
+const newChosenCardBtn = document.getElementById('newPokeBtn');
+newChosenCardBtn.addEventListener('click', getRandomCard);
