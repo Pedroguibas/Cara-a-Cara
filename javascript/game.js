@@ -30,15 +30,35 @@ async function fetchPokemon() {
 }
 
 function addPokemonCard(num, name) {
+    let newCardContainer = document.createElement('div');
+    newCardContainer.classList.add('pokemonCardContainer');
+    newCardContainer.addEventListener('click', flipCard);
+
     let newCard = document.createElement('div');
     newCard.classList.add('pokemonCard');
+
+    let newCardFront = document.createElement('div');
+    newCardFront.classList.add('pokemonCardFront');
+
+    let newCardBack = document.createElement('div');
+    newCardBack.classList.add('pokemonCardBack')
+
     let newPokeImg = document.createElement('img');
     newPokeImg.src = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + num +'.png'
+
     let cardTitle = document.createElement('h1');
     cardTitle.textContent = name;
-    newCard.appendChild(newPokeImg);
-    newCard.appendChild(cardTitle);
-    document.getElementById('gameContainer').appendChild(newCard);
+
+    let cardBackImg = document.createElement('img');
+    cardBackImg.setAttribute('src', 'https://static.wikia.nocookie.net/pokemon-fano/images/6/6f/Poke_Ball.png/revision/latest/scale-to-width-down/732?cb=20140520015336');
+
+    newCardFront.appendChild(newPokeImg);
+    newCardFront.appendChild(cardTitle);
+    newCardBack.appendChild(cardBackImg);
+    newCard.appendChild(newCardFront);
+    newCard.appendChild(newCardBack);
+    newCardContainer.appendChild(newCard);
+    document.getElementById('gameContainer').appendChild(newCardContainer);
 }
 
 function copiaCodigo() {
@@ -91,12 +111,21 @@ async function geraTabuleiroCopiado(pokemonNumber) {
 
 function getRandomCard() {
     document.getElementById('chosenCardContainer').innerHTML = '';
-    let gameCards = document.querySelectorAll('.pokemonCard');
+    let gameCards = document.querySelectorAll('.pokemonCardContainer');
     let cardNumber = Math.floor(Math.random() * 25 + 1);
     let chosenCard = document.createElement('div');
-    chosenCard.classList.add('pokemonCard');
+    chosenCard.classList.add('pokemonCardContainer');
     chosenCard.innerHTML = gameCards[cardNumber].innerHTML;
     document.getElementById('chosenCardContainer').appendChild(chosenCard);
+}
+
+function flipCard() {
+    let card = this.querySelector('.pokemonCard');
+    if (card.classList.contains('pokemonCardFlipped')) {
+        card.classList.remove('pokemonCardFlipped');
+    } else {
+        card.classList.add('pokemonCardFlipped');
+    }
 }
 
 let numberBlackList;

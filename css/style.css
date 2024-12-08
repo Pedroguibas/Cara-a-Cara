@@ -19,16 +19,46 @@ body {
     min-width: 6rem;
     min-height: 6rem;
 }
-.pokemonCard {
+.pokemonCardContainer  {
+    position: relative;
     width: 10rem;
     height: 12rem;
     margin: 0.5rem 0.8rem;
-    background-color: #C4C4C4;
-    border: 5px solid #003a70;
-    border-radius: 20px;
+}
+.pokemonCard {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: all 500ms ease;
+}
+.pokemonCardFront {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: #C4C4C4;
+    border: 5px solid #003a70;
+    border-radius: 20px;
+}
+.pokemonCardBack {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backface-visibility: hidden;
+    background-color: #003a70;
+    border: 5px solid #003a70;
+    border-radius: 20px;
+    transform: rotateY(180deg);
+}
+.pokemonCardFlipped {
+    transform: rotateY(180deg);
 }
 .pokemonCard img {
     width: 7rem;
