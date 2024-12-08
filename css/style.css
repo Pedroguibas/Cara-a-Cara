@@ -38,3 +38,7 @@ body {
 .pokemonCard h1 {
     font-size: 1.3rem;
 }
+#inputCodigoExterno {
+    border: solid 2px #2b465f;
+    border-radius: 10px;
+}
