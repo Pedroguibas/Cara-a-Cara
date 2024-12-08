@@ -4,11 +4,38 @@ header {
 body {
     background-color: #e4e4e4;
 }
+main {
+    position: relative;
+    min-height: 100vh;
+}
+#spinnerContainer {
+    min-width: 8rem;
+    min-height: 8rem;
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+#loadingStatus {
+    min-width: 6rem;
+    min-height: 6rem;
+}
 .pokemonCard {
-    width: fit-content;
-    height: 10rem;
-    background-color: purple;
+    width: 10rem;
+    height: 12rem;
+    margin: 0.5rem 0.8rem;
+    background-color: #C4C4C4;
+    border: 5px solid #003a70;
+    border-radius: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+.pokemonCard img {
+    width: 7rem;
+    margin: 1rem 0;
+    filter: drop-shadow(3px 3px 2px #808080);
+}
+.pokemonCard h1 {
+    font-size: 1.3rem;
 }

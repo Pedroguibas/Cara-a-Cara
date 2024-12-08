@@ -10,7 +10,12 @@ function getRandomNumber(blackList) {
 let numberBlackList;
 
 async function fetchPokemon() {
+    let gameContainer = document.getElementById('gameContainer');
+    gameContainer.style = 'display: none;'
+    let spinner = document.getElementById('loadingStatus');
+    spinner.style = 'display: block;'
     numberBlackList = [0, 0];
+
     for (let i=0; i<24; i++) {
         let pokemonNumber = getRandomNumber(numberBlackList);
         numberBlackList[i] = pokemonNumber;
@@ -18,6 +23,8 @@ async function fetchPokemon() {
         let obj = await response.json();  
         addPokemonCard(pokemonNumber, obj.name);
     }
+    spinner.style = 'display: none;'
+    gameContainer.style = 'display: flex;';
 }
 
 function addPokemonCard(num, name) {
@@ -25,7 +32,7 @@ function addPokemonCard(num, name) {
     newCard.classList.add('pokemonCard');
     let newPokeImg = document.createElement('img');
     newPokeImg.src = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + num +'.png'
-    let cardTitle = document.createElement('h3');
+    let cardTitle = document.createElement('h1');
     cardTitle.textContent = name;
     newCard.appendChild(newPokeImg);
     newCard.appendChild(cardTitle);
