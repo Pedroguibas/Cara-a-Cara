@@ -4,13 +4,12 @@ header {
 body {
     background-color: #e4e4e4;
 }
-main {
-    position: relative;
-    min-height: 100vh;
-}
 #spinnerContainer {
     min-width: 8rem;
     min-height: 8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
     top: 35%;
     left: 50%;
