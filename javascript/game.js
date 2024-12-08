@@ -18,10 +18,16 @@ async function fetchPokemon() {
 
     for (let i=0; i<24; i++) {
         let pokemonNumber = getRandomNumber(numberBlackList);
+        let response = await fetch('https://pokeapi.co/api/v2/pokemon-species/' + pokemonNumber).catch((err) => console.error(err));
+        let obj = await response.json();
+        while (!usableGens.includes(obj.generation.name)) {
+            pokemonNumber = getRandomNumber(numberBlackList);
+            response = await fetch('https://pokeapi.co/api/v2/pokemon-species/' + pokemonNumber).catch((err) => console.error(err));
+            obj = await response.json();
+        }
+
         gameCode = gameCode + pokemonNumber + ';';
         numberBlackList[i] = pokemonNumber;
-        let response = await fetch('https://pokeapi.co/api/v2/pokemon-species/' + pokemonNumber).catch((err) => console.error(err));
-        let obj = await response.json();  
         addPokemonCard(pokemonNumber, obj.name);
     }
     spinner.style = 'display: none;'
@@ -127,9 +133,28 @@ function flipCard() {
     }
 }
 
+function unflipCards() {
+    let flippedCards = document.querySelectorAll('.pokemonCardFlipped');
+    for (let i=0; i<flippedCards.length; i++) {
+        flippedCards[i].classList.remove('pokemonCardFlipped');
+    }
+}
+
+function filtrarPokemon() {
+    let selectedGen = document.querySelectorAll('.checkGen:checked');
+    if (selectedGen.length != 0) {
+        usableGens = ['']
+        for (let i=0; i<selectedGen.length; i++) {
+            usableGens[i] = selectedGen[i].value;
+        }
+    }
+    fetchPokemon();
+}
+
 let numberBlackList;
 let gameCode = 'pkmngmcd:';
 let coppiedGamePokemonList;
+let usableGens = ['generation-i', 'generation-ii', 'generation-iii', 'generation-iv', 'generation-v', 'generation-vi', 'generation-vii', 'generation-viii', 'generation-ix'];
 const novoTabuleiroBtn = document.querySelector('#novoJogoBtn');
 novoTabuleiroBtn.addEventListener('click', fetchPokemon);
 
@@ -141,3 +166,9 @@ loadGameBtn.addEventListener('click', getGameCodeReady);
 
 const newChosenCardBtn = document.getElementById('newPokeBtn');
 newChosenCardBtn.addEventListener('click', getRandomCard);
+
+const unflipCardsBtn = document.getElementById('unflipCards');
+unflipCardsBtn.addEventListener('click', unflipCards)
+
+const filterBtn = document.getElementById('filterBtn');
+filterBtn.addEventListener('click', filtrarPokemon);

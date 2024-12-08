@@ -72,3 +72,6 @@ body {
     border: solid 2px #2b465f;
     border-radius: 10px;
 }
+#modalFiltrarBtn {
+    margin-right: 1.5rem;
+}
