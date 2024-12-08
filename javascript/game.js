@@ -110,12 +110,11 @@ async function geraTabuleiroCopiado(pokemonNumber) {
 }
 
 function getRandomCard() {
-    document.getElementById('chosenCardContainer').innerHTML = '';
+    let chosenCard = document.querySelector('#chosenCard');
+    chosenCard.querySelector('.pokemonCardFront').innerHTML = '';
     let gameCards = document.querySelectorAll('.pokemonCardContainer');
     let cardNumber = Math.floor(Math.random() * 25 + 1);
-    let chosenCard = document.createElement('div');
-    chosenCard.classList.add('pokemonCardContainer');
-    chosenCard.innerHTML = gameCards[cardNumber].innerHTML;
+    chosenCard.querySelector('.pokemonCardFront').innerHTML = gameCards[cardNumber].querySelector('.pokemonCardFront').innerHTML;
     document.getElementById('chosenCardContainer').appendChild(chosenCard);
 }
 
