@@ -8,6 +8,9 @@ header {
 body {
     background-color: #e4e4e4;
 }
+main {
+    min-height: 100vh;
+}
 #spinnerContainer {
     min-width: 8rem;
     min-height: 8rem;
@@ -71,6 +74,7 @@ body {
 }
 .pokemonCard h1 {
     font-size: 1.1rem;
+    color: #002f5a;
 }
 .pokemonCardContainer:hover .pokemonCardFront {
     background-color: #acacac;
