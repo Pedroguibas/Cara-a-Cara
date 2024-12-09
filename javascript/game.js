@@ -119,7 +119,7 @@ function getRandomCard() {
     let chosenCard = document.querySelector('#chosenCard');
     chosenCard.querySelector('.pokemonCardFront').innerHTML = '';
     let gameCards = document.querySelectorAll('.pokemonCardContainer');
-    let cardNumber = Math.floor(Math.random() * 25 + 1);
+    let cardNumber = Math.floor(Math.random() * 24 + 1);
     chosenCard.querySelector('.pokemonCardFront').innerHTML = gameCards[cardNumber].querySelector('.pokemonCardFront').innerHTML;
     document.getElementById('chosenCardContainer').appendChild(chosenCard);
     chosenCard.addEventListener('click', getRandomCard);
