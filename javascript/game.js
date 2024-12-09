@@ -122,6 +122,7 @@ function getRandomCard() {
     let cardNumber = Math.floor(Math.random() * 25 + 1);
     chosenCard.querySelector('.pokemonCardFront').innerHTML = gameCards[cardNumber].querySelector('.pokemonCardFront').innerHTML;
     document.getElementById('chosenCardContainer').appendChild(chosenCard);
+    chosenCard.addEventListener('click', getRandomCard);
 }
 
 function flipCard() {
