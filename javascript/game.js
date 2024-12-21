@@ -19,13 +19,11 @@ async function fetchPokemon() {
     let pokemonArray = await response.json();
 
     for (let i=0; i<24; i++) {
-        // do {
-            pokemonNumber = getRandomNumber(numberBlackList);
-        // } while (!usableGens.includes(obj.generation.name));
+        pokemonNumber = pokemonFiltered? getFilteredNumber(numberBlackList) : getRandomNumber(numberBlackList);
 
         gameCode = gameCode + pokemonNumber + ';';
         numberBlackList[i] = pokemonNumber;
-        addPokemonCard(pokemonNumber, pokemonArray.results[pokemonNumber].name);
+        addPokemonCard(pokemonNumber + 1, pokemonArray.results[pokemonNumber].name);
     }
     spinner.style = 'display: none;'
     mainContainer.style = 'display: block;';
@@ -141,20 +139,82 @@ function unflipCards() {
 function filtrarPokemon() {
     let selectedGen = document.querySelectorAll('.checkGen:checked');
     if (selectedGen.length != 0) {
-        usableGens = ['']
-        for (let i=0; i<selectedGen.length; i++) {
-            usableGens[i] = selectedGen[i].value;
-        }
+        pokemonFiltered = true;
     } else {
-        usableGens = ['generation-i', 'generation-ii', 'generation-iii', 'generation-iv', 'generation-v', 'generation-vi', 'generation-vii', 'generation-viii', 'generation-ix'];
+        pokemonFiltered = false;
     }
     fetchPokemon();
+}
+
+function getRandomFilteredGen() {
+    let selectedGen = document.querySelectorAll('.checkGen:checked');
+    let randomGen = selectedGen[Math.floor(Math.random() * selectedGen.length)].value;
+    let interval = [];
+    switch (randomGen) {
+        case 'gen1':
+            interval[0] = 0;
+            interval[1] = 150;
+            break;
+
+        case 'gen2':
+            interval[0] = 151;
+            interval[1] = 250;
+            break;
+
+        case 'gen3':
+            interval[0] = 251;
+            interval[1] = 385;
+            break;
+
+        case 'gen4':
+            interval[0] = 386;
+            interval[1] = 492;
+            break;
+
+        case 'gen5':
+            interval[0] = 493;
+            interval[1] = 648;
+            break;
+
+        case 'gen6':
+            interval[0] = 649;
+            interval[1] = 720;
+            break;
+
+        case 'gen7':
+            interval[0] = 721;
+            interval[1] = 808;
+            break;
+
+        case 'gen8':
+            interval[0] = 809;
+            interval[1] = 904;
+            break;
+
+        case 'gen9':
+            interval[0] = 905;
+            interval[1] = 1024;
+            break;
+    }
+    console.log(interval)
+
+    return interval;
+}
+
+function getFilteredNumber(blackList) {
+    let rng;
+    interval = getRandomFilteredGen();
+    do {
+        rng =  Math.floor(Math.random() * (interval[0]-interval[1]) + interval[1]);
+    } while (blackList.includes(rng));
+
+    return rng;
 }
 
 let numberBlackList;
 let gameCode = 'pkmngmcd:';
 let coppiedGamePokemonList;
-let usableGens = ['generation-i', 'generation-ii', 'generation-iii', 'generation-iv', 'generation-v', 'generation-vi', 'generation-vii', 'generation-viii', 'generation-ix'];
+let pokemonFiltered = false;
 
 const novoTabuleiroBtn = document.querySelector('#novoJogoBtn');
 novoTabuleiroBtn.addEventListener('click', fetchPokemon);
