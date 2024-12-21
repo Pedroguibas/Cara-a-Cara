@@ -1,3 +1,5 @@
+/* --- Geral --- */
+
 @import url('https://fonts.googleapis.com/css2?family=Poiret+One&family=Silkscreen:wght@400;700&display=swap');
 * {
     font-family: Silkscreen;
@@ -11,6 +13,9 @@ body {
 main {
     min-height: 100vh;
 }
+
+/* --- Loading Spinner --- */
+
 #spinnerContainer {
     min-width: 8rem;
     min-height: 8rem;
@@ -26,6 +31,9 @@ main {
     min-width: 6rem;
     min-height: 6rem;
 }
+
+/* --- Cartas --- */
+
 .pokemonCardContainer  {
     position: relative;
     width: 11rem;
@@ -91,6 +99,12 @@ main {
     border: 5px solid #002f5a;
     cursor: pointer;
 }
+.gameControls {
+    margin: 2rem 0 5rem 0;
+}
+
+/* --- Modais --- */
+
 #inputCodigoExterno {
     border: solid 2px #2b465f;
     border-radius: 10px;
@@ -108,9 +122,9 @@ main {
     text-align: center;
     font-size: 0.9rem;
 }
-.gameControls {
-    margin: 2rem 0 5rem 0;
-}
+
+/* --- Footer --- */
+
 footer {
     background-color: #2b465f;
 }

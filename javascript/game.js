@@ -1,11 +1,4 @@
-function getRandomNumber(blackList) {
-    let rng;
-    do {
-        rng =  Math.floor(Math.random() * 1024);
-    } while (blackList.includes(rng));
-
-    return rng;
-}
+//Fetch functions
 
 async function fetchPokemon() {
     gameCode = 'pkmngmcd:';
@@ -29,6 +22,27 @@ async function fetchPokemon() {
     mainContainer.style = 'display: block;';
     getRandomCard();
 }
+
+async function geraTabuleiroCopiado(pokemonNumber) {
+    gameCode = 'pkmngmcd:';
+    document.getElementById('gameContainer').innerHTML = '';
+    let mainContainer = document.getElementById('mainContent');
+    mainContainer.style = 'display: none;'
+    let spinner = document.getElementById('loadingStatus');
+    spinner.style = 'display: block;'
+    let response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0').catch((err) => console.error(err));
+    let pokemonArray = await response.json();
+
+    for (let i=0; i<24; i++) {
+        gameCode = gameCode + pokemonNumber[i] + ';';
+        addPokemonCard(pokemonNumber[i]+1, pokemonArray.results[pokemonNumber[i]].name);
+    }
+    spinner.style = 'display: none;'
+    mainContainer.style = 'display: block;';
+    getRandomCard();
+}
+
+//Geração de tabuleiro
 
 function addPokemonCard(num, name) {
     let newCardContainer = document.createElement('div');
@@ -62,6 +76,34 @@ function addPokemonCard(num, name) {
     document.getElementById('gameContainer').appendChild(newCardContainer);
 }
 
+//Funções do jogo
+
+function getRandomCard() {
+    let chosenCard = document.querySelector('#chosenCard');
+    chosenCard.querySelector('.pokemonCardFront').innerHTML = '';
+    let gameCards = document.querySelectorAll('.pokemonCardContainer');
+    let cardNumber = Math.floor(Math.random() * 24 + 1);
+    chosenCard.querySelector('.pokemonCardFront').innerHTML = gameCards[cardNumber].querySelector('.pokemonCardFront').innerHTML;
+    document.getElementById('chosenCardContainer').appendChild(chosenCard);
+    chosenCard.addEventListener('click', getRandomCard);
+}
+
+function flipCard() {
+    let card = this.querySelector('.pokemonCard');
+    if (card.classList.contains('pokemonCardFlipped')) {
+        card.classList.remove('pokemonCardFlipped');
+    } else {
+        card.classList.add('pokemonCardFlipped');
+    }
+}
+
+function unflipCards() {
+    let flippedCards = document.querySelectorAll('.pokemonCardFlipped');
+    for (let i=0; i<flippedCards.length; i++) {
+        flippedCards[i].classList.remove('pokemonCardFlipped');
+    }
+}
+
 function copiaCodigo() {
     let newInput = document.createElement('input');
     newInput.setAttribute('value', gameCode);
@@ -91,50 +133,7 @@ function getGameCodeReady() {
     }
 }
 
-async function geraTabuleiroCopiado(pokemonNumber) {
-    gameCode = 'pkmngmcd:';
-    document.getElementById('gameContainer').innerHTML = '';
-    let mainContainer = document.getElementById('mainContent');
-    mainContainer.style = 'display: none;'
-    let spinner = document.getElementById('loadingStatus');
-    spinner.style = 'display: block;'
-    let response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0').catch((err) => console.error(err));
-    let pokemonArray = await response.json();
-
-    for (let i=0; i<24; i++) {
-        gameCode = gameCode + pokemonNumber[i] + ';';
-        addPokemonCard(pokemonNumber[i]+1, pokemonArray.results[pokemonNumber[i]].name);
-    }
-    spinner.style = 'display: none;'
-    mainContainer.style = 'display: block;';
-    getRandomCard();
-}
-
-function getRandomCard() {
-    let chosenCard = document.querySelector('#chosenCard');
-    chosenCard.querySelector('.pokemonCardFront').innerHTML = '';
-    let gameCards = document.querySelectorAll('.pokemonCardContainer');
-    let cardNumber = Math.floor(Math.random() * 24 + 1);
-    chosenCard.querySelector('.pokemonCardFront').innerHTML = gameCards[cardNumber].querySelector('.pokemonCardFront').innerHTML;
-    document.getElementById('chosenCardContainer').appendChild(chosenCard);
-    chosenCard.addEventListener('click', getRandomCard);
-}
-
-function flipCard() {
-    let card = this.querySelector('.pokemonCard');
-    if (card.classList.contains('pokemonCardFlipped')) {
-        card.classList.remove('pokemonCardFlipped');
-    } else {
-        card.classList.add('pokemonCardFlipped');
-    }
-}
-
-function unflipCards() {
-    let flippedCards = document.querySelectorAll('.pokemonCardFlipped');
-    for (let i=0; i<flippedCards.length; i++) {
-        flippedCards[i].classList.remove('pokemonCardFlipped');
-    }
-}
+//filtros de Pokémon
 
 function filtrarPokemon() {
     let selectedGen = document.querySelectorAll('.checkGen:checked');
@@ -200,6 +199,8 @@ function getRandomFilteredGen() {
     return interval;
 }
 
+//Random Number Generator
+
 function getFilteredNumber(blackList) {
     let rng;
     interval = getRandomFilteredGen();
@@ -209,6 +210,17 @@ function getFilteredNumber(blackList) {
 
     return rng;
 }
+
+function getRandomNumber(blackList) {
+    let rng;
+    do {
+        rng =  Math.floor(Math.random() * 1024);
+    } while (blackList.includes(rng));
+
+    return rng;
+}
+
+//Declaração de vairáveis globais
 
 let numberBlackList;
 let gameCode = 'pkmngmcd:';
