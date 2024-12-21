@@ -1,7 +1,7 @@
 function getRandomNumber(blackList) {
     let rng;
     do {
-        rng =  Math.floor(Math.random() * 1025 + 1);
+        rng =  Math.floor(Math.random() * 1024);
     } while (blackList.includes(rng));
 
     return rng;
@@ -23,7 +23,7 @@ async function fetchPokemon() {
 
         gameCode = gameCode + pokemonNumber + ';';
         numberBlackList[i] = pokemonNumber;
-        addPokemonCard(pokemonNumber + 1, pokemonArray.results[pokemonNumber].name);
+        addPokemonCard(pokemonNumber+1, pokemonArray.results[pokemonNumber].name);
     }
     spinner.style = 'display: none;'
     mainContainer.style = 'display: block;';
@@ -74,12 +74,12 @@ function copiaCodigo() {
 function getGameCodeReady() {
     let externalGameCode = document.getElementById('inputCodigoExterno').value;
     if (externalGameCode.includes('pkmngmcd:')) {
-        let j = 0;
-        coppiedGamePokemonList = [];
-        for (let i=9; i<externalGameCode.length; i++) {
+        coppiedGamePokemonList = [''];
+        for (let i=9, j=0; i<externalGameCode.length; i++) {
             if (externalGameCode.charAt(i) != ';') {
                 coppiedGamePokemonList[j] = coppiedGamePokemonList[j] + externalGameCode.charAt(i)
             } else {
+                coppiedGamePokemonList[j] = parseInt(coppiedGamePokemonList[j]);
                 j++;
                 coppiedGamePokemonList[j] = '';
             }
@@ -98,12 +98,12 @@ async function geraTabuleiroCopiado(pokemonNumber) {
     mainContainer.style = 'display: none;'
     let spinner = document.getElementById('loadingStatus');
     spinner.style = 'display: block;'
+    let response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0').catch((err) => console.error(err));
+    let pokemonArray = await response.json();
 
     for (let i=0; i<24; i++) {
         gameCode = gameCode + pokemonNumber[i] + ';';
-        let response = await fetch('https://pokeapi.co/api/v2/pokemon-species/' + pokemonNumber[i]).catch((err) => console.error(err));
-        let obj = await response.json();  
-        addPokemonCard(pokemonNumber[i], obj.name);
+        addPokemonCard(pokemonNumber[i]+1, pokemonArray.results[pokemonNumber[i]].name);
     }
     spinner.style = 'display: none;'
     mainContainer.style = 'display: block;';
@@ -196,7 +196,6 @@ function getRandomFilteredGen() {
             interval[1] = 1024;
             break;
     }
-    console.log(interval)
 
     return interval;
 }
