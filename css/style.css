@@ -99,6 +99,24 @@ main {
     border: 5px solid #002f5a;
     cursor: pointer;
 }
+
+/* --- Escolher carta alvo --- */
+
+@keyframes pulseBorder {
+    0% {
+        border-color: #002f5a;
+    }
+    50% {
+        border-color: #800000;
+    }
+    100% {
+        border-color: #002f5a;
+    }
+}
+.targetCardOption {
+    animation: pulseBorder 3s infinite;
+}
+
 .gameControls {
     margin: 2rem 0 5rem 0;
 }

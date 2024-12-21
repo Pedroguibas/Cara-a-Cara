@@ -133,6 +133,39 @@ function getGameCodeReady() {
     }
 }
 
+function chooseTargetCard() {
+    let cards = document.querySelectorAll('.pokemonCardContainer');
+    this.textContent = 'cancelar';
+    this.removeEventListener('click', chooseTargetCard);
+    this.addEventListener('click', cancelChooseTarget); 
+    for (let i=1; i<25; i++) {
+        cards[i].querySelector('.pokemonCardFront').classList.add('targetCardOption');
+        cards[i].removeEventListener('click', flipCard);
+        cards[i].addEventListener('click', targetCardChosen)
+    }
+}
+
+function targetCardChosen() {
+    let cards = document.querySelectorAll('.pokemonCardContainer');
+    let chosenCard = document.querySelector('#chosenCard');
+    chosenCard.querySelector('.pokemonCardFront').innerHTML = this.querySelector('.pokemonCardFront').innerHTML;
+    
+    cancelChooseTarget();
+}
+
+function cancelChooseTarget() {
+    let cards = document.querySelectorAll('.pokemonCardContainer');
+    chooseTargetBtn.textContent = 'Escolher Carta Alvo';
+    chooseTargetBtn.removeEventListener('click', cancelChooseTarget); 
+    chooseTargetBtn.addEventListener('click', chooseTargetCard);
+
+    for (let i=1; i<25; i++) {
+        cards[i].querySelector('.pokemonCardFront').classList.remove('targetCardOption');
+        cards[i].removeEventListener('click', targetCardChosen);
+        cards[i].addEventListener('click', flipCard)
+    }
+}
+
 //filtros de Pokémon
 
 function filtrarPokemon() {
@@ -241,3 +274,6 @@ unflipCardsBtn.addEventListener('click', unflipCards)
 
 const filterBtn = document.getElementById('filterBtn');
 filterBtn.addEventListener('click', filtrarPokemon);
+
+const chooseTargetBtn = document.getElementById('chooseTargetBtn');
+chooseTargetBtn.addEventListener('click', chooseTargetCard)
