@@ -11,12 +11,12 @@
     <body onload="fetchPokemon();">
         <header>
             <div class="container">
-                <div class="row justify-content-around">
+                <div class="row justify-content-between">
                     <div class="m-3 col-2">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/800px-International_Pok%C3%A9mon_logo.svg.png" alt="Pokebola" class="w-75">
                     </div>
-                    <div class="m-3 col-1">
-                        <img src="https://cdn6.aptoide.com/imgs/8/4/f/84f4398e6fd8ca4e885fa687468da39d_icon.png" alt="Cara-a-Cara" class="w-75">
+                    <div class="m-3 col-3 d-flex align-items-center justify-content-end">
+                        <button class="btn btn-outline-light mr-3" type="button" id="modalComoJogarBtn" data-bs-toggle="modal" data-bs-target="#modalComoJogar">Como Jogar?</button>
                     </div>
                 </div>
             </div>
@@ -115,6 +115,25 @@
                             <div class="d-flex justify-content-end mt-3">
                                 <button class="btn btn-primary" id="carrgarTabuleiroBtn" data-bs-dismiss="modal">Carregar</button>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="modalComoJogar">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1>Como Jogar?</h1>
+                        </div>
+                        <div class="modal-body d-flex flex-column justify-content-center">
+                            <p>Para jogar o Cara-a-Cara você precisa de um oponente. Cada jogador deve acessar o site com o seu próprio dispositivo, não é possível jogar com um dispositivo só.</p>
+                            <p>Assim que os dois jogadores estiverem prontos, um deles deve adicionar os filtros (se desejados) e gerar um tabuleiro. Com o tabuleiro gerado o jogador deve clicar no botão "código" para copiar o código do tabuleiro.</p>
+                            <p>Por fim, o código deve ser enviado para o seu oponente, que irá clicar no botão "insira um código" para colar o código.</p>
+                            <p>Agora, os jogadores farão, alternadamente, perguntas de sim ou não para tentar adivinhar qual é o pokémon de seu oponente. Quando pensar que um pokémon não pode ser a resposta, clique em cima dele para que a carta se vire.</p>
+                            <p><strong>Boa Sorte!</strong></p>
+                        </div>
+                        <div class="modal-footer d-flex justify-content-end">
+                            <button class="btn btn-primary" data-bs-dismiss="modal">Entendi!</button>
                         </div>
                     </div>
                 </div>

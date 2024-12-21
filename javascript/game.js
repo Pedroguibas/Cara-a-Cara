@@ -8,6 +8,11 @@ function getRandomNumber(blackList) {
 }
 
 async function fetchPokemon() {
+    //Declarando variáveis pois apesar de funcionar declarando-as dentro da estrutura do...while penso que não é o mais correto já que as variáveis são usadas fora da estrutura. 
+    //Gostaria de poder dar fetch em todos os pokemon de uma vez ao carregar o site, isso deixaria a geração de tabuleiro mais rápida. Porém, a API limita a resposta para um array de 20 objetos.
+    let pokemonNumber;
+    let response;
+    let obj;
     gameCode = 'pkmngmcd:';
     document.getElementById('gameContainer').innerHTML = '';
     let mainContainer = document.getElementById('mainContent');
@@ -17,14 +22,11 @@ async function fetchPokemon() {
     numberBlackList = [0, 0];
 
     for (let i=0; i<24; i++) {
-        let pokemonNumber = getRandomNumber(numberBlackList);
-        let response = await fetch('https://pokeapi.co/api/v2/pokemon-species/' + pokemonNumber).catch((err) => console.error(err));
-        let obj = await response.json();
-        while (!usableGens.includes(obj.generation.name)) {
+        do {
             pokemonNumber = getRandomNumber(numberBlackList);
             response = await fetch('https://pokeapi.co/api/v2/pokemon-species/' + pokemonNumber).catch((err) => console.error(err));
             obj = await response.json();
-        }
+        } while (!usableGens.includes(obj.generation.name)) 
 
         gameCode = gameCode + pokemonNumber + ';';
         numberBlackList[i] = pokemonNumber;
@@ -80,7 +82,7 @@ function getGameCodeReady() {
     let externalGameCode = document.getElementById('inputCodigoExterno').value;
     if (externalGameCode.includes('pkmngmcd:')) {
         let j = 0;
-        coppiedGamePokemonList = ['', ''];
+        coppiedGamePokemonList = [];
         for (let i=9; i<externalGameCode.length; i++) {
             if (externalGameCode.charAt(i) != ';') {
                 coppiedGamePokemonList[j] = coppiedGamePokemonList[j] + externalGameCode.charAt(i)

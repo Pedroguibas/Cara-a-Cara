@@ -70,6 +70,8 @@ main {
 .pokemonCard img {
     width: 7rem;
     margin: 0.5rem 0;
+}
+.pokemonCardFront img {
     filter: drop-shadow(3px 3px 2px #808080);
 }
 .pokemonCard h1 {
@@ -94,6 +96,16 @@ main {
 }
 #modalFiltrarBtn {
     margin-right: 1.5rem;
+}
+.modal h1 {
+    font-size: 1.7rem;
+}
+.modal h3 {
+    font-size: 1.3rem;
+}
+.modal p {
+    text-align: center;
+    font-size: 0.9rem;
 }
 .gameControls {
     margin: 2rem 0 5rem 0;
