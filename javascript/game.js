@@ -160,6 +160,7 @@ let numberBlackList;
 let gameCode = 'pkmngmcd:';
 let coppiedGamePokemonList;
 let usableGens = ['generation-i', 'generation-ii', 'generation-iii', 'generation-iv', 'generation-v', 'generation-vi', 'generation-vii', 'generation-viii', 'generation-ix'];
+
 const novoTabuleiroBtn = document.querySelector('#novoJogoBtn');
 novoTabuleiroBtn.addEventListener('click', fetchPokemon);
 
@@ -168,9 +169,6 @@ copyGame.addEventListener('click', copiaCodigo);
 
 const loadGameBtn = document.getElementById('carrgarTabuleiroBtn');
 loadGameBtn.addEventListener('click', getGameCodeReady);
-
-const newChosenCardBtn = document.getElementById('newPokeBtn');
-newChosenCardBtn.addEventListener('click', getRandomCard);
 
 const unflipCardsBtn = document.getElementById('unflipCards');
 unflipCardsBtn.addEventListener('click', unflipCards)
