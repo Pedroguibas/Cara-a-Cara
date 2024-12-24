@@ -146,7 +146,6 @@ function chooseTargetCard() {
 }
 
 function targetCardChosen() {
-    let cards = document.querySelectorAll('.pokemonCardContainer');
     let chosenCard = document.querySelector('#chosenCard');
     chosenCard.querySelector('.pokemonCardFront').innerHTML = this.querySelector('.pokemonCardFront').innerHTML;
     
