@@ -13,6 +13,10 @@ body {
 main {
     min-height: 100vh;
 }
+button {
+    font-size: 1em !important; 
+    padding: 1em !important;
+}
 
 /* --- Loading Spinner --- */
 
@@ -36,9 +40,9 @@ main {
 
 .pokemonCardContainer  {
     position: relative;
-    width: 11rem;
-    height: 11.5rem;
-    margin: 0.5rem 1rem;
+    width: 11em;
+    height: 11.5em;
+    margin: 0.5em 1em;
 }
 .pokemonCard {
     position: absolute;
@@ -55,6 +59,7 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-around;
     background-color: #C4C4C4;
     border: 5px solid #003a70;
     border-radius: 20px;
@@ -76,15 +81,14 @@ main {
     transform: rotateY(180deg);
 }
 .pokemonCard img {
-    width: 7rem;
-    margin: 0.5rem 0;
+    width: 8em;
 }
 .pokemonCardFront img {
     filter: drop-shadow(3px 3px 2px #808080);
 }
 .pokemonCard h1 {
     text-align: center;
-    font-size: 1.1rem;
+    font-size: 1em;
     color: #002f5a;
 }
 .pokemonCardContainer:hover .pokemonCardFront {
@@ -118,7 +122,10 @@ main {
 }
 
 .gameControls {
-    margin: 2rem 0 5rem 0;
+    margin: 2em 0 5em 0;
+}
+.gameControls button {
+    margin: 0.5em;
 }
 
 /* --- Modais --- */
@@ -128,17 +135,17 @@ main {
     border-radius: 10px;
 }
 #modalFiltrarBtn {
-    margin-right: 1.5rem;
+    margin-right: 1.5em;
 }
 .modal h1 {
-    font-size: 1.7rem;
+    font-size: 1.7em;
 }
 .modal h3 {
-    font-size: 1.3rem;
+    font-size: 1.3em;
 }
 .modal p {
     text-align: center;
-    font-size: 0.9rem;
+    font-size: 1em;
 }
 
 /* --- Footer --- */
@@ -151,4 +158,44 @@ footer p {
 }
 .footerContainer {
     padding: 3rem 0;
+}
+
+/* --- Media Query --- */
+
+@media screen and (max-width: 425px) {
+    body {
+        font-size: 0.45em;
+    }
+    .pokemonCard h1 {
+        display: none;
+    }
+    .pokemonCardFront  {
+        border: 2px solid #003a70;
+    }
+}
+@media screen and (min-width: 426px) and (max-width: 767px) {
+    body {
+        font-size: 0.6em;
+    }
+    .pokemonCardFront  {
+        border: 3px solid #003a70;
+    }
+}
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    body {
+        font-size: 0.68em;
+    }
+    .pokemonCardFront  {
+        border: 3px solid #003a70;
+    }
+}
+@media screen and (min-width: 1025px) and (max-width: 1200px) {
+    body {
+        font-size: 0.7em;
+    }
+}
+@media screen and (min-width: 1201px) and (max-width: 1399px) {
+    body {
+        font-size: 0.8em;
+    }
 }
