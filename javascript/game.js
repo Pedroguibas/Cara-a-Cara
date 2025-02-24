@@ -65,7 +65,7 @@ function addPokemonCard(num, name) {
     cardTitle.textContent = name;
 
     let cardBackImg = document.createElement('img');
-    cardBackImg.setAttribute('src', 'https://static.wikia.nocookie.net/pokemon-fano/images/6/6f/Poke_Ball.png/revision/latest/scale-to-width-down/732?cb=20140520015336');
+    cardBackImg.setAttribute('src', 'img/Poke_Ball.png');
 
     newCardFront.appendChild(newPokeImg);
     newCardFront.appendChild(cardTitle);
