@@ -17,6 +17,9 @@ button {
     font-size: 1em !important; 
     padding: 1em !important;
 }
+img {
+    -webkit-user-drag: none;
+}
 
 /* --- Loading Spinner --- */
 
